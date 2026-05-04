@@ -3,7 +3,7 @@
 # Use the `STACK-SETUP-[step]-[name].md` files to help build your environment
 
 ---
-
+ - [STACK SETUP README (this document)](/.STACK-SETUP-00-readme.md)
  - [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
  - [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./STACK-SETUP-02-LMStudio-MCP.md)
  - [Step 3: Workflow Operations and Git Tooling](./STACK-SETUP-03-Workflow-Git.md)
