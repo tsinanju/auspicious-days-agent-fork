@@ -13,30 +13,32 @@
 
 ---
 
-# Suggested Reading
-## 01 ENV
-## 02 LMStudio, MCP
-## 03 Workflow, GIT
-## A MCP Configuration
+# Suggested Reading and Official Resources
 
-## B - Axway Sentinel 
-For advanced configuration, troubleshooting, and volume management, refer to the official Axway and Docker documentation below.
+To fully master and troubleshoot this AI-agentic development stack, it is highly recommended to familiarize yourself with the official documentation of the underlying technologies. 
 
-### Axway Sentinel 4.2.0 (DOCKER)
- - [All Sentinel 4.2.0 Documentation](https://docs.axway.com/search?labelkey=prod-sentinel-420&labelkey=ct-category&sort.field=title&sort.value=asc)**: Main search hub for all Sentinel 4.2.0 guides and release notes.
- - **[Installation Guide (PDF)](https://docs.axway.com/bundle/Sentinel_420_InstallationGuide_allOS_en_PDF)**: Full offline-friendly PDF of the installation guide.
- - **[Sentinel Normal Installation in Docker (.env Configuration)](https://docs.axway.com/bundle/Sentinel_420_InstallationGuide_allOS_en_HTML5/page/Content/InstallationGuide/docker/Sentinel_Normal_Installation_in_Docker.htm#Configuration)**: Detailed reference for all available `.env` configuration parameters.
- - **[Advanced Docker Customization Recommendations](https://docs.axway.com/bundle/Sentinel_420_InstallationGuide_allOS_en_HTML5/page/Content/InstallationGuide/docker/Docker_recommandations.htm)**: Best practices for tuning and customizing the Sentinel Docker image.
- - **[Volume Management in Docker Compose](https://docs.axway.com/bundle/Sentinel_420_InstallationGuide_allOS_en_HTML5/page/Content/InstallationGuide/docker/volume_management.htm)**: Instructions on how to properly persist, backup, and manage Sentinel data volumes.
+Below is a curated list of reference links categorized by their role in your environment.
 
-### Docker Air-Gapped Resources
- - **[Air-Gapped Containers (Docker Docs)](https://docs.docker.com/enterprise/security/hardened-desktop/air-gapped-containers/)**: Official Docker documentation on managing and securing air-gapped container deployments.
-iner deployments.
+## 1. Environment & Operating System
+*   **[Windows Subsystem for Linux (WSL) Documentation](https://learn.microsoft.com/en-us/windows/wsl/)**: Microsoft's official guide on WSL architecture, network bridging, and resource configuration (`.wslconfig`).
+*   **[Arch Linux Wiki](https://wiki.archlinux.org/)**: The definitive resource for Arch Linux package management (`pacman`), system configuration, and user permissions.
+*   **[ArchWSL GitHub Repository](https://github.com/yuk7/ArchWSL)**: The community project used to run Arch Linux on WSL. Check here for specific WSL-to-Arch integration issues.
 
-## C - SonarQube (DOCKER)
- - **[SonarQube Official Documentation](https://docs.sonarsource.com/)** - Main landing page for all SonarQube guides and references.
- - **[Server Installation and Setup From Docker Image](https://docs.sonarsource.com/sonarqube-server/server-installation/from-docker-image)** - Detailed breakdown of Docker-specific environment variables and volume mappings.
- - **[SonarQube for IDE](https://docs.sonarsource.com/sonarqube-for-vs-code)** - Guides on configuring rule sets, bindings, and troubleshooting the IDE extension.
+## 2. AI Inference & Orchestration
+*   **[LM Studio Documentation](https://lmstudio.ai/docs)**: Guides on local server configuration, CORS settings, GPU offloading, and handling OpenAI-compatible API requests.
+*   **[Model Context Protocol (MCP) Specification](https://modelcontextprotocol.io/)**: The official standard for connecting AI models to external tools, file systems, and APIs. Essential for building custom `mcp-server.ts` scripts.
+*   **[Roo Code (Roo-Cline) GitHub](https://github.com/RooVetGit/Roo-Cline)**: The official repository for the Roo Code VSCode extension. Useful for understanding the "Dual-Brain" architecture, auto-approval settings, and prompt engineering for the orchestrator.
+
+## 3. Runtimes & Workflow Tooling
+*   **[Bun Documentation](https://bun.sh/docs)**: The incredibly fast JavaScript/TypeScript runtime used in this stack. Covers dependency management, script execution, and test running.
+*   **[Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/)**: The standard format your AI models should use when executing autonomous `git commit` commands to ensure a clean, machine-readable project history.
+
+## 4. Security, Analysis & Containerization
+*   **[Docker Documentation](https://docs.docker.com/)**: Official guides for managing Docker daemon, containers, and `docker-compose` networks within a Linux environment.
+*   **[SonarQube Official Documentation](https://docs.sonarsource.com/sonarqube/latest/)**: Comprehensive guides on static code analysis, quality gates, and configuring the `sonar-project.properties` file.
+*   **[SonarLint for VSCode](https://docs.sonarsource.com/sonarlint/vs-code/)**: Instructions for binding your local IDE to your Dockerized SonarQube backend for real-time error highlighting.
+*   **[Axway Sentinel Documentation](https://docs.axway.com/)**: Official Axway portal for configuring, deploying, and managing Sentinel instances in Dockerized and air-gapped environments.
+extension.
 
 ---
    
