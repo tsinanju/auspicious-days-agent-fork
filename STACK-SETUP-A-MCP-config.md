@@ -1,4 +1,4 @@
-**STACK-SETUP-A-MCP-config**
+*STACK-SETUP-A-MCP-config*
 # Appendix A: Supplementary Guide: Custom MCP Server Configurations (LM Studio)
  - The Model Context Protocol (MCP) enables your local models to securely interact with external tools, APIs, and the local file system. In this architecture, MCP configuration is handled directly within **LM Studio** on the Windows host, rather than inside the VSCode extension. This centralized approach allows any connected client (like Roo Code) to access the same toolset.
 
