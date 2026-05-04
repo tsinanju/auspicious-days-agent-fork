@@ -148,5 +148,10 @@ cat /etc/resolv.conf | grep nameserver
 > Important: For this bridge to work, ensure that LM Studio on your host is configured to bind to 0.0.0.0 (or the specific WSL adapter IP) and that your Windows Firewall allows inbound connections on the LM Studio port (default 1234).
 
 ---
-**Next Step:** [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./STACK-SETUP-02-LMStudio-MCP.md)
+[Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
+[Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](/.STACK-SETUP-02-LMStudio-MCP.md)
+[Step 3: STACK-SETUP-03-Workflow-Git.md](./STACK-SETUP-03-Workflow-Git.md)
+[Appendix A: Supplementary Guide: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
+---
+Developed by the Auspicious-Days Contributor Circle.
 
