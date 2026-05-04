@@ -1,5 +1,6 @@
 *STACK-SETUP-02-LMStudio-MCP.md*
-# (DRAFT) Step 2: LM Studio, MCP Configuration, and "Dual-Brain" Setup (DRAFT)
+# (DRAFT)
+# Step 2: LM Studio, MCP Configuration, and "Dual-Brain" Setup (DRAFT)
 
 This section covers configuring local LLM inference via LM Studio on your Windows host, setting up the Model Context Protocol (MCP), and establishing a "Dual-Brain" architecture in Roo Code.
 
