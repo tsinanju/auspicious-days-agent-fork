@@ -53,4 +53,4 @@ MCP allows Roo Code to interface securely with external tools, scripts, and syst
 > *The specific `mcp.json` configuration for custom tool integration will be documented in a separate supplementary guide or generalized here at a later time.*
 
 ---
-**Next Step:** [Step 3: Workflow Operations and Git Tooling](./step-3-workflow-git.md)
+**Next Step:** [Step 3: Workflow Operations and Git Tooling](./STACK-SETUP-03-Workflow-Git.md)
