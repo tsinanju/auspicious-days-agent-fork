@@ -1,5 +1,6 @@
-STACK-SETUP-01-ENV.md v0.1
-# (DRAFT) Step 1: Environment Setup (Arch-Headless-WSL & IDE) (DRAFT)
+STACK-SETUP-01-ENV.md
+# (DRAFT) 
+# Step 1: Environment Setup (Arch-Headless-WSL & IDE) (DRAFT)
 
 This section covers the foundational setup of our AI-agentic development stack. It utilizes a headless Arch Linux 
 environment running on Windows Subsystem for Linux (WSL2), optimized for high-precision 
