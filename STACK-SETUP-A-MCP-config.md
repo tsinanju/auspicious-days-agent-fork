@@ -68,7 +68,9 @@ If you want LM Studio to execute tools specifically inside your headless Arch Li
  - In the Roo Code chat, ask: What tools do you currently have access to? The model should list the tools you just configured in LM Studio.
 
 ---
-[Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./step-2-lmstudio-mcp.md)
+[Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
+[Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](/.STACK-SETUP-02-LMStudio-MCP.md)
+[Step 3: STACK-SETUP-03-Workflow-Git.md](./STACK-SETUP-03-Workflow-Git.md)
 [Appendix A: Supplementary Guide: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
 ---
 Developed by the Auspicious-Days Contributor Circle.
