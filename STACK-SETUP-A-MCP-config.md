@@ -67,6 +67,114 @@ If you want LM Studio to execute tools specifically inside your headless Arch Li
  - Because Roo Code connects to LM Studio via the OpenAI-compatible API, LM Studio will automatically expose the configured MCP tools to Roo Code.
  - In the Roo Code chat, ask: What tools do you currently have access to? The model should list the tools you just configured in LM Studio.
 
+# Example: Arch-Bridged `mcp-server.ts`
+This is an example of a custom MCP server written in TypeScript. It is designed to be executed by Bun inside your Arch WSL environment via LM Studio's `wsl.exe` bridge. 
+This specific server exposes a tool called `get_arch_system_info`, which runs native Linux commands (`uname` and `free`) to prove the AI is interacting directly with the Arch environment.
+## 1. Install Dependencies
+Before running the server, you need to install the official MCP SDK inside your Arch WSL project directory:
+```bash
+cd ~/ai-workflow
+bun add @modelcontextprotocol/sdk
+```
+## 2. Create `mcp-server.ts`
+Create a file named `mcp-server.ts` in your project root (e.g. `~/ai-workflow/mcp-server.ts`) and paste the following code:
+
+```TypeScript
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import {
+  CallToolRequestSchema,
+  ListToolsRequestSchema,
+} from "@modelcontextprotocol/sdk/types.js";
+import { exec } from "child_process";
+import { promisify } from "util";
+
+const execAsync = promisify(exec);
+
+// Initialize the MCP Server
+const server = new Server(
+  {
+    name: "arch-wsl-tools",
+    version: "1.0.0",
+  },
+  {
+    capabilities: {
+      tools: {},
+    },
+  }
+);
+
+// Define the available tools
+server.setRequestHandler(ListToolsRequestSchema, async () => {
+  return {
+    tools: [
+      {
+        name: "get_arch_system_info",
+        description: "Retrieves OS and memory metrics directly from the Arch Linux WSL environment.",
+        inputSchema: {
+          type: "object",
+          properties: {}, // No inputs required for this specific tool
+        },
+      },
+    ],
+  };
+});
+
+// Handle tool execution requests from the AI Model
+server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  if (request.params.name === "get_arch_system_info") {
+    try {
+      // Execute native Arch Linux commands
+      const { stdout } = await execAsync("uname -sr && free -m");
+      
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Arch WSL System Info:\n${stdout}`,
+          },
+        ],
+      };
+    } catch (error) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Command failed: ${String(error)}`,
+          },
+        ],
+        isError: true,
+      };
+    }
+  }
+  
+  throw new Error(`Tool not recognized: ${request.params.name}`);
+});
+
+// Start the server using stdio transport (required for LM Studio/WSL integration)
+async function run() {
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+  
+  // Note: All logging must use console.error when using stdio transport, 
+  // because console.log would corrupt the JSON-RPC communication channel.
+  console.error("Arch WSL MCP Server is actively listening on stdio.");
+}
+
+run().catch((error) => {
+  console.error("Fatal error in MCP server:", error);
+  process.exit(1);
+});
+```
+
+## 3. How It Works with LM Studio
+ - LM Studio (on Windows) reads your mcp.json configuration.
+ - It executes: `wsl.exe -d archlinux -- /home/aiuser/.bun/bin/bun run /home/aiuser/ai-workflow/mcp-server.ts`
+ - The AI model decides to use the `get_arch_system_info` tool.
+ - LM Studio sends a JSON-RPC request over `stdin` through the WSL bridge.
+ - The Bun script intercepts the request, runs the native Linux `uname` and `free` commands, and sends the result back over `stdout`.
+ - The model reads the output and formulates a response for you.
+
 ---
 
  - [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
