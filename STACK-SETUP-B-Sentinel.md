@@ -88,7 +88,9 @@ docker compose -f docker-compose.yml down
    ```
 Note: Rolling back from a Dockerized environment to a non-containerized standard installation requires manually exporting your data, reinstalling Sentinel via RPM/DEB, and restoring the configurations.
 
-## 6.0 Official Documentation & Configuration Resources
+---
+
+## A - Official Documentation & Configuration Resources
 For advanced configuration, troubleshooting, and volume management, refer to the official Axway and Docker documentation below.
 
 ### Axway Sentinel 
