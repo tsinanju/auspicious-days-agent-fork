@@ -1,21 +1,13 @@
 {
-  "name": "afnm-my-mod",
-  "version": "0.1.0",
-  "description": "Starter AFNM mod scaffold with runtime validation and workshop packaging helpers.",
+  "name": "auspicious-days",
+  "version": "0.1.3alpha",
+  "description": "An AFNM Mod that changes character stats based on Numerology",
   "author": {
-    "name": "your-name"
+    "name": "tristen-sinanju"
   },
-  "gameVersion": "0.6.54",
+  "gameVersion": "0.6.52",
   "packageManager": "bun@1.3.11",
-  "afnmWorkshop": {
-    "workshopId": "",
-    "title": "My AFNM Mod",
-    "tags": [
-      "Gameplay"
-    ],
-    "visibility": "private",
-    "previewImagePath": ""
-  },
+  "afnmWorkshop": "afnm-workshop.json",
   "main": "mod.js",
   "scripts": {
     "extract-translations": "afnm-extract-translations",
@@ -31,7 +23,7 @@
     "runtime:grep": "node scripts/installed-game-runtime.js grep"
   },
   "devDependencies": {
-    "afnm-types": "0.6.54-3",
+    "afnm-types": "0.6.52-v2",
     "prettier": "^3.8.1",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
@@ -45,6 +37,7 @@
     "@mui/icons-material": "^7.3.9",
     "@mui/material": "^7.3.9",
     "@reduxjs/toolkit": "^2.11.2",
+    "@sentry/node": "^10.51.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }

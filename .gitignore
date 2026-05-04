@@ -1,4 +1,5 @@
 node_modules/
+afnm-workshop.json
 dist/
 builds/
 mods/
@@ -15,3 +16,14 @@ settings.json
 .junie/
 # NOTE: .agents/ is NOT ignored — it is the cross-agent skills directory per agentskills.io
 # Project skills live in .agents/skills/{skill-name}/SKILL.md
+
+# SonarFiles
+.scannerwork/
+sonar-project.properties
+
+# Roo Code Architecture
+!.roo/rules-code/
+!.roo/skills/
+
+# Add'l Ignored Locations
+.vscode/
