@@ -24,6 +24,7 @@ const DEFAULT_GAME_DIR_CANDIDATES = [
     'common',
     'Ascend From Nine Mountains',
   ),
+  'I:\\SteamLibrary\\steamapps\\common\\Ascend From Nine Mountains',
   'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ascend From Nine Mountains',
   'C:\\Program Files\\Steam\\steamapps\\common\\Ascend From Nine Mountains',
 ];
