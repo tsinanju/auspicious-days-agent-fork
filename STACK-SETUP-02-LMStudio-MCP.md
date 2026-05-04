@@ -52,10 +52,13 @@ MCP allows Roo Code to interface securely with external tools, scripts, and syst
 > [!NOTE]
 > *The specific `mcp.json` configuration for custom tool integration will be documented in a separate supplementary guide or generalized here at a later time.*
 
+
 ---
-[Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
-[Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](/.STACK-SETUP-02-LMStudio-MCP.md)
-[Step 3: STACK-SETUP-03-Workflow-Git.md](./STACK-SETUP-03-Workflow-Git.md)
-[Appendix A: Supplementary Guide: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
+
+ - [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
+ - [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](/.STACK-SETUP-02-LMStudio-MCP.md)
+ - [Step 3: STACK-SETUP-03-Workflow-Git.md](./STACK-SETUP-03-Workflow-Git.md)
+ - [Appendix A: Supplementary Guide: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
+
 ---
-Developed by the Auspicious-Days Contributor Circle.d)
+Developed by the Auspicious-Days Contributor Circle.
