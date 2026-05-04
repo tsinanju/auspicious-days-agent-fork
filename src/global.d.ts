@@ -1,10 +1,11 @@
 import type { ModAPI, RootState } from 'afnm-types';
 
-type TemplateConfig = {
+type AuspiciousDaysConfig = {
   enabled: boolean;
+  numerologyBase: 'date' | 'character';
 };
 
-type TemplateDebugApi = {
+type AuspiciousDaysDebugApi = {
   getMetadata: () => {
     name: string;
     version: string;
@@ -12,9 +13,10 @@ type TemplateDebugApi = {
     description: string;
     gameVersion?: string;
   };
-  getConfig: () => TemplateConfig;
+  getConfig: () => AuspiciousDaysConfig;
   getLastLocation: () => string | null;
   getSnapshot: () => RootState | null;
+  getStatModifiers: () => { luck: number; crafting: number; damageReduction: number };
   logSnapshot: () => void;
 };
 
@@ -40,8 +42,14 @@ declare global {
       ) => [T, (value: T | ((previousValue: T) => T)) => void];
     };
     __afnmModInstalled?: Record<string, boolean>;
-    __afnmModDebug?: Record<string, TemplateDebugApi>;
+    __afnmModDebug?: Record<string, AuspiciousDaysDebugApi>;
   }
 }
+declare const require: any;
+declare module '*.jpg' {
+  const value: string;
+  export default value;
+}
 
-export {};
+export { };
+
