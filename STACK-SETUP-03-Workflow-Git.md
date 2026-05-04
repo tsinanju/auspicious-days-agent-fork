@@ -50,13 +50,12 @@ Your Arch WSL environment is equipped with bun, an ultra-fast all-in-one JavaScr
  - Run scripts: bun run <script-name>
  - Execute TypeScript files directly: bun run index.ts
 
-
 ---
 
  - [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
- - [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](/.STACK-SETUP-02-LMStudio-MCP.md)
- - [Step 3: STACK-SETUP-03-Workflow-Git.md](./STACK-SETUP-03-Workflow-Git.md)
+ - [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./STACK-SETUP-02-LMStudio-MCP.md)
+ - [Step 3: Workflow Operations and Git Tooling](./STACK-SETUP-03-Workflow-Git.md)
  - [Appendix A: Supplementary Guide: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
 
 ---
-Developed by the Auspicious-Days Contributor Circle.
+Developed by the Auspicious-Days Contributor Circle.e.
