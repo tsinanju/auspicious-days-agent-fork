@@ -1,5 +1,6 @@
 *STACK-SETUP-03-Workflow-Git.md*
-# (DRAFT) Step 3: Workflow Operations and Git Tooling (DRAFT)
+# (DRAFT) 
+# Step 3: Workflow Operations and Git Tooling (DRAFT)
   *Initialize Roo Code: Open the Roo Code extension sidebar in VSCode and verify that it successfully connects to the LM Studio API endpoint.*
 
 ## 1.0 - Daily Startup Routine
