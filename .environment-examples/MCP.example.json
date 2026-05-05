@@ -1,0 +1,77 @@
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "wsl-file-system": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-server-wsl-filesystem",
+        "<YOUR_WSL_DISTRO_NAME>", 
+        "<PATH_TO_LINUX_WORKSPACE>"
+      ]
+    },
+    "command-execution-suite": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@modelcontextprotocol/server-command-execution"
+      ],
+      "env": {
+        "ALLOWED_COMMANDS": "sonar,sonar-scanner,sentry-cli,curl,wsl,docker,npm,tsc,git",
+        "SONAR_HOST_URL": "<YOUR_SONAR_HOST_URL>",
+        "SONAR_TOKEN": "<YOUR_SONAR_TOKEN>",
+        "SENTRY_URL": "<YOUR_SENTRY_HOST_URL>",
+        "SENTRY_AUTH_TOKEN": "<YOUR_SENTRY_TOKEN>",
+        "SENTRY_ORG": "<YOUR_SENTRY_ORG_SLUG>",
+        "SENTRY_PROJECT": "<YOUR_SENTRY_PROJECT_SLUG>"
+      }
+    },
+    "fetch-server": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+    },
+    "memory-server": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "git-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git",
+        "<PATH_TO_WINDOWS_WORKSPACE>"
+      ]
+    },
+    "puppeteer-server": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "<YOUR_BRAVE_API_KEY>"
+      }
+    },
+    "github-server": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<YOUR_GITHUB_PAT>"
+      }
+    },
+    "postgres-database": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "<YOUR_POSTGRES_CONNECTION_STRING>" 
+      ]
+    }
+  }
+}
