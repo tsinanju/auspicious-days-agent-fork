@@ -71,13 +71,13 @@ If you want LM Studio to execute tools specifically inside your headless Arch Li
 # Example: Arch-Bridged `mcp-server.ts`
 This is an example of a custom MCP server written in TypeScript. It is designed to be executed by Bun inside your Arch WSL environment via LM Studio's `wsl.exe` bridge. 
 This specific server exposes a tool called `get_arch_system_info`, which runs native Linux commands (`uname` and `free`) to prove the AI is interacting directly with the Arch environment.
-## 1. Install Dependencies
+## 1.0 Install Dependencies
 Before running the server, you need to install the official MCP SDK inside your Arch WSL project directory:
 ```bash
 cd ~/ai-workflow
 bun add @modelcontextprotocol/sdk
 ```
-## 2. Create `mcp-server.ts`
+## 2.0 Create `mcp-server.ts`
 Create a file named `mcp-server.ts` in your project root (e.g. `~/ai-workflow/mcp-server.ts`) and paste the following code:
 
 ```TypeScript
@@ -168,7 +168,7 @@ run().catch((error) => {
 });
 ```
 
-## 3. How It Works with LM Studio
+## 3.0 How It Works with LM Studio
  - LM Studio (on Windows) reads your mcp.json configuration.
  - It executes: `wsl.exe -d archlinux -- /home/aiuser/.bun/bin/bun run /home/aiuser/ai-workflow/mcp-server.ts`
  - The AI model decides to use the `get_arch_system_info` tool.
