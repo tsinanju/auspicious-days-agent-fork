@@ -184,14 +184,13 @@ bun run scan
  - [SonarQube for IDE](https://docs.sonarsource.com/sonarqube-for-vs-code) - Guides on configuring rule sets, bindings, and troubleshooting the IDE extension.
 
 ---
-
+ - [STACK SETUP README](./STACK-SETUP-00-readme.md)
  - [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
  - [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./STACK-SETUP-02-LMStudio-MCP.md)
  - [Step 3: Workflow Operations and Git Tooling](./STACK-SETUP-03-Workflow-Git.md)
  - [Appendix A: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
- - [Appendix B: Installing Sentinel on Arch WSL](./STACK-SETUP-B-Sentinel.md)
- - [Appendix C: Installing SonarQube on Arch WSL](./STACK-SETUP-C-SonarQube.md)
-
+ - [Appendix B: Installing Sentry on Arch WSL](./STACK-SETUP-B-Sentry.md)
+ - ### -> [Appendix C: Installing SonarQube on Arch WSL](./STACK-SETUP-C-SonarQube.md)
 ---
 
 Developed by the Auspicious-Days Contributor Circle.
