@@ -1,4 +1,4 @@
 # Path Protocol
-- Always use relative paths (e.g., ./.roo/rules-code/AGENTS.md) instead of absolute paths.
+- Always use relative paths (e.g. ./.roo/rules-code/AGENTS.md) instead of absolute paths.
 - The project root is the current directory.
 - I have verified that ./.roo/rules-code/AGENTS.md exists. Read it and proceed to "Project Identification".

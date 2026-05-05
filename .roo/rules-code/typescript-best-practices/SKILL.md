@@ -266,6 +266,8 @@ See `references/anti-patterns/common-mistakes.md` for detailed examples.
 
 ## Scripts Reference
 
+> **Note:** These scripts use Deno (bundled with the skill, not the project's `bun` toolchain). They are standalone utilities, not part of the mod build pipeline.
+
 ### analyze.ts
 
 Analyze TypeScript code for quality issues:

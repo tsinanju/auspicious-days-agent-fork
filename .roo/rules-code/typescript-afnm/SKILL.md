@@ -78,24 +78,24 @@ import type { ModAPI, ModOptionsFC, RootState, CombatEntity } from 'afnm-types';
 import { GAME_VERSION } from 'afnm-types';
 ```
 
-For newly-added APIs whose helper types are not exported directly, infer from the
+For APIs whose helper types are not exported directly, infer from the
 available method instead of importing private package paths:
 
 ```typescript
-import type { ModReduxAPI } from 'afnm-types';
+import type { ModAPI } from 'afnm-types';
 
 type ListedSave = Awaited<
-  ReturnType<ModReduxAPI['actions']['listSaves']>
+  ReturnType<ModAPI['utils']['listSaves']>
 >[number];
 ```
 
 Keep this kind of helper local and small, and verify the method exists with
 `bun run runtime:grep -- "<method-name>"` before building UI around it.
 
-## Rules
+## Guidelines
 
-- Never use `any`. Use `unknown` and narrow with type guards.
-- Never disable strict mode or add `@ts-ignore` without a comment explaining why.
+- Avoid `any`. Use `unknown` and narrow with type guards. If `any` is unavoidable, add a comment explaining why.
+- Avoid disabling strict mode or adding `@ts-ignore` without a comment explaining the reason.
 - Run `bun run typecheck` before committing. The build script transpiles without full type checking.
-- Keep game-shape assumptions in `src/modContent/` or a dedicated `src/integration/` folder.
+- Consider keeping game-shape assumptions in `src/modContent/` or a dedicated `src/integration/` folder.
 - Formatting: 2 spaces, single quotes, trailing commas, LF endings (controlled by `.prettierrc`).

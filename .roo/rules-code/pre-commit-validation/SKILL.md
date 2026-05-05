@@ -28,11 +28,11 @@ bun run release:validate    # runs typecheck + build + runtime:oracle
 bun run runtime:grep -- "<hook-names-you-use>"
 ```
 
-## Rules
+## Guidelines
 
-- Never commit code that doesn't typecheck. Run `bun run typecheck` first.
-- Never claim "it builds" without running `bun run build` and confirming zero errors.
-- Never skip the oracle check before a release. Runtime behavior is the authority.
-- If any verification step fails, fix the issue before proceeding. Do not commit with known failures.
+- Confirm code typechecks with `bun run typecheck` before committing.
+- Confirm the build succeeds with `bun run build` before claiming it works.
+- Include the oracle check before releases — runtime behavior is the authority.
+- If any verification step fails, fix the issue before proceeding.
 - Check `git diff` for secrets, API keys, or sensitive data before committing.
-- Follow commit message conventions: `feat:`, `fix:`, `docs:`, `perf:`, `chore:`.
+- Follow commit conventions from the `conventional-git` skill.
