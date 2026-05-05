@@ -58,7 +58,7 @@ Your Arch WSL environment is equipped with bun, an ultra-fast all-in-one JavaScr
  - ### -> [Step 3: Workflow Operations and Git Tooling](./STACK-SETUP-03-Workflow-Git.md)
  - [Appendix A: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
  - [Appendix B: Installing Sentry on Arch WSL](./STACK-SETUP-B-Sentry.md)
- - [Appendix C: Installing SonarQube on Arch WSL](./STACK-SETUP-C-SonarQube.md).md)
+ - [Appendix C: Installing SonarQube on Arch WSL](./STACK-SETUP-C-SonarQube.md)
 
 ---
 Developed by the Auspicious-Days Contributor Circle.e.
