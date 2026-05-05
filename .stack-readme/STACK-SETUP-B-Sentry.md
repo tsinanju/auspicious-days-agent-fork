@@ -112,7 +112,7 @@ sentry-cli send-event ./mock-crash.json
 bun run ./.stack-readme/scripts/[script-name].ts
 ```
 ---
--## 7.0 - Testing an Agentic Tool Call with Sentry
+## 7.0 - Testing an Agentic Tool Call with Sentry
  - Now that Sentry is running locally, your SDK is installed, and the MCP environment is configured, you can test if your AI agent (Roo Code) can autonomously interact with the Sentry API.
  - To verify that the "Dual-Brain" setup can trigger an error and validate it using secure tool calls, open the Roo Code chat interface and paste the following prompt:
 > **Test Prompt for Roo Code:**
