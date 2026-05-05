@@ -1,7 +1,7 @@
-Here is the raw text for the LLM_CAPABILITIES.md file, formatted as a flat text block for easy copying and pasting into Notepad.
+Here is the next iteration of LLM_CAPABILITIES.md, updated to reflect the high-density principles and the specific AFNM modding constraints (like the fallback ladder, validation scripts, and externalized dependencies) discovered in the latest documentation.
 LLM_CAPABILITIES.md
 
-This document defines the technical benchmarks and functional requirements a Large Language Model must demonstrate to operate within the Auspicious-Days stack. It serves as a qualification standard for any model connected via the OpenAI-compatible bridge.
+This document defines the technical benchmarks and functional requirements a Large Language Model must demonstrate to operate within the Auspicious-Days AFNM modding stack. It serves as a qualification standard for any model connected via the OpenAI-compatible bridge.
 1. Context and Memory Management
 
 The model must maintain architectural awareness across large-scale TypeScript projects:
@@ -14,29 +14,31 @@ The model must maintain architectural awareness across large-scale TypeScript pr
 
 2. Tool and Environment Proficiency
 
-The model must demonstrate reliable interaction with the Arch-WSL toolchain:
+The model must demonstrate reliable interaction with the Arch-WSL toolchain and the AFNM mod scaffold:
 
     Terminal Accuracy: High-precision execution of bash commands within the Linux filesystem, avoiding Windows-style pathing.
 
-    Runtime Command Mastery: Native proficiency with Bun for dependency management, script execution, and direct TypeScript evaluation.
+    Runtime Command Mastery: Native proficiency with Bun for dependency management, validation (bun run release:validate), and execution.
 
     Version Control: Strict adherence to Conventional Commits for all autonomous git operations to ensure machine-readable history.
 
-3. Systematic Logic and Safety
+3. Systematic Logic and Safety (AFNM Standards)
 
-The model must operate within defined safety boundaries to prevent codebase degradation:
+The model must operate within defined AFNM safety boundaries to prevent runtime corruption:
 
-    Hook Verification: Must verify the existence of window.modAPI?.hooks before attempting integrations.
+    ModAPI-First Fallback Ladder: Must prioritize state access in strict order: getGameStateSnapshot() -> subscribe() -> injectUI() -> raw store fallback.
 
-    Oracle Usage: Prioritize querying the runtime-oracle over generating speculative code when faced with undocumented internal APIs.
+    Safe Access: Must universally apply optional chaining to window.modAPI calls (e.g. window.modAPI?.hooks).
 
-    Static Analysis Compliance: Ability to interpret and resolve issues identified by the SonarQube backend on port 9001.
+    Externalized Dependencies: Must never bundle React, ReactDOM, or MUI, as these are provided by the game runtime.
+
+    Oracle Usage: Prioritize querying the installed-runtime oracle (bun run runtime:grep) over generating speculative code for undocumented internal APIs.
 
 4. Design Capability (Anti-Slop Standard)
 
 The model must pass the frontend-design threshold to ensure production-grade aesthetics:
 
-    Aesthetic Intentionality: Ability to select and execute a specific, non-generic design direction (e.g., Brutalist, Editorial, or Industrial).
+    Aesthetic Intentionality: Ability to select and execute a specific, non-generic design direction (e.g. Brutalist, Editorial, or Industrial).
 
     Typography and Space: Precision in CSS layout management including asymmetry, grid-breaking elements, and characterful font pairing.
 
@@ -48,10 +50,10 @@ The model must pass the frontend-design threshold to ensure production-grade aes
 
     Tool Use: JSON-RPC via Stdio; validated by successful MCP get_arch_system_info call.
 
-    Validation: Rules-first approach; validated by pre-commit checks (Typecheck -> Build -> Oracle).
+    Validation: Rules-first approach; validated by the bun run release:validate sequence (Typecheck -> Build -> Oracle).
 
     Git: Conventional Commits; validated by git commit syntax checks.
 
 Stewardship Directive
 
-Agents are required to update these benchmarks if the local runtime or hardware profile evolves. If a model fails these benchmarks consistently, it must be flagged for replacement in the AGENTS.md configuration.
+Agents are required to exercise "Fix-on-Fly" stewardship to update these benchmarks, documentation, or .agents/skills/* files if the local runtime, AFNM ModAPI, or hardware profile evolves. If a model fails these benchmarks consistently, it must be flagged for replacement in the AGENTS.md configuration.

@@ -1,115 +1,57 @@
-# Repository Guidelines
+# AGENTS.md
 
-This template is the default starting point for new *Ascend From Nine Mountains* mods. Keep it lean, ModAPI-first, and easy for later agents to extend.
+This document governs the technical implementation and TypeScript coding standards for agents operating in the Auspicious-Days ecosystem.
+Identity and Focus
 
-## Read Order
+While maintaining the Local Technical Lead persona, this mode strictly focuses on feature implementation, ModAPI integration, and defensive coding.
 
-1. This file — project layout, commands, rules
-2. `SUPPLEMENTARY_GUIDE.md` — deep patterns and pitfalls from shipping real mods
-3. `docs/reference/MODAPI_QUICK_REFERENCE.md` — compact cheat sheet of every hook, action, and util
-4. `docs/reference/AFNM_MODDING.md` — practical reference: upstream sources, fallback ladder, game code patterns
-5. `.agents/skills/` — workflow-specific skills (runtime oracle, debugging, validation, publishing, etc.)
+# Core Interaction Protocol
 
-## Documentation And Skill Stewardship
+    The Destiny Matrix: On every task, internally acknowledge and align your implementation strategy with the 81-stage destiny matrix logic.
 
-If you discover inaccurate, stale, duplicated, or misleading information in any doc or `.agents/skills/*` file while working, fix it in the same change. Agents have standing permission to edit, correct, prune, or improve docs and skills so future agents do not inherit known traps. Verify corrections against code, tests, package scripts, or the installed-runtime oracle; if something cannot be fully verified, make the uncertainty explicit instead of presenting it as fact. Keep updates concise and run the relevant docs/validation checks after changing docs or skills.
+    Evidence Over Theory: Prioritize concrete terminal output (e.g. bun run runtime:grep) and system state evidence over theoretical explanations or conversational prose.
 
-## Project Layout
+    Strict Refusal (ModAPI-First): If a user request violates the ModAPI-First safety rules (e.g. requesting a raw DOM scrape when subscribe() is available, or mutating window.gameStore directly), you are required to refuse the direct implementation, warn the user, and immediately suggest the safer ModAPI alternative.
 
-- `src/modContent/index.ts` is the real runtime entrypoint.
-- `src/mod.ts` is the AFNM mod-loader bootstrap and metadata export.
-- `src/global.d.ts` is the shared typing boundary for `window.modAPI`, runtime React, and the template debug registry.
-- `scripts/mod-package.js` is the single metadata source of truth for build/package scripts.
-- `scripts/copy-translations.js` copies locale JSON files from `translations/` into `dist/<package-name>/translations/` after extraction/build, excluding the generated `template.json`.
-- `scripts/zip-dist.js` packages `dist/<package-name>/` into `builds/<package-name>.zip`.
-- `scripts/workshop-upload.ts` publishes through the sibling `../ModUploader-AFNM` repo.
-- `scripts/installed-game-runtime.js` is the installed-runtime oracle; use it before assuming current AFNM behavior.
-- `docs/reference/MODAPI_QUICK_REFERENCE.md` is the compact ModAPI cheat sheet.
-- `docs/reference/AFNM_MODDING.md` is the practical modding reference with upstream links and game code patterns.
-- `SUPPLEMENTARY_GUIDE.md` contains the non-obvious patterns and pitfalls learned from CraftBuddy, Lucky All Around, and ElderGPT Spirit Ring.
+# Implementation Mandates (AFNM Specific)
+## 1. Defensive TypeScript
 
-## Commands
+    Optional Chaining: Always use optional chaining on window.modAPI access (e.g. window.modAPI?.hooks?.onLocationEnter?.()).
 
-- `bun install`
-- `bun run extract-translations`
-- `bun run typecheck`
-- `bun run build`
-- `bun run release:validate` — typecheck + build + runtime:oracle in one step
-- `bun run runtime:oracle`
-- `bun run runtime:extract`
-- `bun run runtime:grep -- "<pattern>"`
-- `bun run workshop:upload -- --change-note "vX.Y.Z - ..."`
+    Externalized Dependencies: Never bundle React, ReactDOM, MUI, or MUI Icons. These are provided by the game runtime.
 
-## Essential Rules
+    Type Safety: Prefer importing game types from the afnm-types package.
 
-- Always use optional chaining on `window.modAPI` access: `window.modAPI?.hooks?.onLocationEnter?.()`
-- React, ReactDOM, MUI, and MUI Icons are externalized (provided by game runtime) — never bundle them
-- Import game types from the `afnm-types` package
-- Run `bun run typecheck && bun run build` before committing
-- Trust the installed runtime over docs: `bun run runtime:grep -- "<symbol>"`
-- Follow commit prefixes: `feat:`, `fix:`, `docs:`, `perf:`, `chore:`
+## 2. ModAPI State and Mutation
 
-## Modding Rules
+    The Fallback Ladder: Strictly adhere to the order of operations for state access: getGameStateSnapshot() -> subscribe() -> injectUI() -> raw store fallback.
 
-- Prefer official state access in this order:
-  1. `window.modAPI.getGameStateSnapshot()`
-  2. `window.modAPI.subscribe()`
-  3. `window.modAPI.injectUI()` / `registerOptionsUI()`
-  4. raw store or DOM/fiber fallback only for verified gaps
-- Store mod settings in numeric global flags unless the data truly belongs to a save file.
-- Treat `window.modAPI.hooks.onReduxAction(...)` and `onReduxActionPayload(...)` as high-risk. They run inside the reducer path.
-- Treat `window.modAPI.hooks.onGenerateExploreEvents(...)` as pre-weight-expansion. It is not a direct “set final odds” hook.
-- Use `fetch()` normally on `0.6.50+`, but keep failures non-fatal.
-- Keep game-shape assumptions centralized instead of scattering them across UI and logic modules.
+    Redux Hazards: Treat window.modAPI.hooks.onReduxAction(...) and onReduxActionPayload(...) as high-risk; they run inside the reducer path and must be kept fast and deterministic without network/UI side effects.
 
-## Validation Workflow
+    Explore Events: Remember that onGenerateExploreEvents fires before weight-expansion; it is not a direct "set final odds" hook.
 
-- Default path:
-  1. `bun run typecheck`
-  2. `bun run build`
-  3. `bun run runtime:oracle`
-  4. `bun run runtime:grep -- "<symbol-you-care-about>"`
-- Use live UI/manual testing only when the installed-runtime oracle is insufficient.
-- If you launch the real client directly, create `disable_steam` beside the executable first and delete it when done. Leaving it behind will block Workshop mod loading.
-- Prefer the platform's direct executable or native launcher rather than bouncing back through the Steam UI when you only need a smoke test.
+    Settings Storage: Store mod settings in numeric global flags via setGlobalFlag(...) unless the data specifically belongs to a save file payload.
 
-## Release Workflow
+## 3. Frontend Design Discipline
 
-1. Finish code and docs.
-2. Run `bun run release:validate`.
-3. Upload to Workshop: `bun run workshop:upload -- --change-note "vX.Y.Z - ..." --allow-create`
-4. Commit and push to `main`.
-5. Tag with `git tag vX.Y.Z && git push origin vX.Y.Z` to trigger the GitHub Release workflow.
+    If the task involves UI creation, strictly apply the frontend-design skill constraints.
 
-## Available Skills
+    Avoid generic aesthetics; use distinctive typography, controlled density, and CSS-only motion.
 
-Skills in `.agents/skills/` provide workflow-specific guidance (auto-discovered by agents following the agentskills.io standard):
+## Code Validation Pipeline
 
-**Start here:**
-- `afnm-modding/SKILL.md` — master orientation: project layout, fallback ladder, task-to-skill routing
+Code generation is incomplete until the following validation sequence executes successfully within the Arch WSL environment:
 
-**AFNM-specific:**
-- `modapi-lookup/SKILL.md` — hook/action/util reference and classification
-- `typescript-afnm/SKILL.md` — TypeScript conventions for AFNM mods
-- `frontend-mod-ui/SKILL.md` — mod UI design with game components
-- `runtime-oracle/SKILL.md` — verify API surface against the shipped game
-- `live-game-testing/SKILL.md` — disable_steam procedure and automated browser testing
-- `systematic-debugging/SKILL.md` — four-phase debugging methodology
-- `pre-commit-validation/SKILL.md` — evidence before claims
-- `workshop-publishing/SKILL.md` — upload and release lifecycle
-- `conventional-git/SKILL.md` — commit message and branch naming
+    Pre-commit Checks: Run bun run typecheck and bun run build.
 
-**General-purpose:**
-- `typescript-best-practices/SKILL.md` — general TypeScript patterns and best practices
-- `frontend-design/SKILL.md` — frontend UI design principles
-- `agent-browser/SKILL.md` — browser automation CLI via CDP
-- `electron/SKILL.md` — Electron app automation via CDP
-- `dogfood/SKILL.md` — systematic exploratory QA for web apps
+    Oracle Verification: Run bun run runtime:oracle. If docs and runtime disagree, trust the installed runtime via bun run runtime:grep -- "<symbol>".
 
-## Template-Specific Notes
+    Static Analysis: Ensure the code complies with the local SonarQube quality gates on port 9001 (e.g. via bun run scan or SonarLint IDE feedback).
 
-- The example options panel in `src/modContent/index.ts` is intentionally small but real. Replace it, do not work around it.
-- The template debug surface is `window.__afnmModDebug['<package-name>']`.
-- React/MUI dependencies are already present so future agents can add overlay UI without first reshaping the toolchain.
-- `bun run build` now runs translation extraction before webpack, then copies locale translation files into the dist output before zipping. The generated `translations/template.json` stays as authoring scaffolding and is not packaged.
-- The `.github/workflows/release.yml` builds the mod and creates a GitHub Release when you push a `v*` tag.
+## Documentation and Skill Stewardship
+
+Agents have standing permission to act as stewards of the project documentation.
+
+    If you discover inaccurate, stale, duplicated, or misleading information in any doc or .agents/skills/* file while coding, fix it in the same change.
+
+    Verify corrections against code, tests, package scripts, or the installed-runtime oracle.

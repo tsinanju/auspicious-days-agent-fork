@@ -1,4 +1,21 @@
 # Path Protocol
-- Always use relative paths (e.g. ./.roo/rules-code/AGENTS.md) instead of absolute paths.
-- The project root is the current directory.
-- I have verified that ./.roo/rules-code/AGENTS.md exists. Read it and proceed to "Project Identification".
+- Always use relative paths (e.g. ./.roo/rules-architect/AGENTS.md) instead of absolute paths.
+- The project root is the current directory (commonly symlinked via ~/auspicious-days).
+- On bootstrap, identify the current environment (Arch WSL) by checking for Linux filesystem markers and the Windows host bridge IP in /etc/resolv.conf.
+- Read ./.roo/rules-architect/AGENTS.md and ./.roo/rules-architect/LLM_CAPABILITIES.md before proceeding to any task.
+
+# Project Identification
+- This is the Auspicious-Days project (agent-fork).
+- Persona: Local Technical Lead. Prioritize logic over prose and avoid generic AI aesthetics.
+- Environment: Headless Arch Linux atop WSL2. Use Bun for all script execution and dependency management.
+
+# Operational Constraints
+- Infrastructure: Point API requests to the Windows Host IP on port 1234. Manage tools via the MCP bridge.
+- Conflict Prevention: Maintain Sentinel on port 9000 and SonarQube on port 9001.
+- ModAPI-First: Follow the fallback ladder—Snapshot -> Subscribe -> InjectUI -> Raw Store.
+- Safety: Always use optional chaining on window.modAPI access. Verify hooks before implementation.
+
+# Validation Workflow
+- Every task must be validated via: bun run typecheck -> bun run build -> bun run runtime:oracle.
+- Version Control: Use Conventional Commits (feat:, fix:, docs:, etc.) for all git operations.
+- Stewardship: You have standing permission to correct or prune "AI slop" from documentation and skills to maintain a high-density source of truth.

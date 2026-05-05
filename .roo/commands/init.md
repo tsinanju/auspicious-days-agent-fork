@@ -1,28 +1,44 @@
----
-description: Analyze codebase and create concise AGENTS.md files for AI assistants
----
+init.md
+description: Environment discovery and high-density rule orchestration
+Task
 
-# Task
-[cite_start]Analyze this codebase and create/update AGENTS.md files to enable immediate productivity for AI assistants[cite: 1, 2].
+Analyze the current environment and rule hierarchy to establish the Local Technical Lead persona and operational context.
+Critical Discovery Phase
 
-# Critical Discovery Phase
-1. [cite_start]**Check Existing Rules**: You must first read any existing `AGENTS.md`, `.cursorrules`, `CLAUDE.md`, or `.roorules` in the project root[cite: 8, 21].
-2. **Check Mode-Specific Rules**: Check for existing files at these exact paths relative to the project root:
-   - [cite_start]`.roo/rules-code/AGENTS.md` [cite: 6, 27]
-   - [cite_start]`.roo/rules-debug/AGENTS.md` [cite: 6, 27]
-   - [cite_start]`.roo/rules-ask/AGENTS.md` [cite: 6, 27]
-   - [cite_start]`.roo/rules-architect/AGENTS.md` [cite: 6, 28]
+    Rule Ingestion: Read the root .roorules (or .clinerules) and immediately sync with the architecture definitions in:
 
-# Content Guidelines (The Non-Obvious Principle)
-- [cite_start]**Delete Obvious Info**: Aggressively remove standard practices, framework defaults (e.g., "React uses JSX"), or anything derivable from file names[cite: 7, 11, 20].
-- [cite_start]**Keep Non-Obvious Discoveries**: Only include project-specific utilities, non-standard patterns, or hidden dependencies discovered by reading the code (e.g., custom `safeWriteJson` utilities)[cite: 3, 30, 35].
-- **Conciseness**: Aim for approximately 20 lines. [cite_start]The goal is to make the files shorter and more valuable than before[cite: 4, 11, 16].
+        ./.roo/rules-architect/AGENTS.md
 
-# Output Structure
-1. [cite_start]**Main AGENTS.md**: Header must be "# AGENTS.md\n\nThis file provides guidance to agents..."[cite: 19].
-2. [cite_start]**Mode-Specific Files**: Create or improve the files in `.roo/rules-*/` within the project root[cite: 23, 24].
+        ./.roo/rules-architect/LLM_CAPABILITIES.md
 
-# Instructions for the Assistant
-- [cite_start]Use `list_files` and `read_file` immediately to begin the discovery phase.
-- [cite_start]If `update_todo_list` is available, create a list covering stack identification, command extraction, and pattern analysis[cite: 5, 9, 12, 17].
-- [cite_start]Signal completion using `attempt_completion` only after the files are updated[cite: 11, 36, 37].
+    Environment Verification: Detect the host/guest boundary. Check for WSL markers, mount points (e.g. /mnt/o/), and the internal network bridge IP via /etc/resolv.conf to facilitate LM Studio communication.
+
+    Specialized Mode Loading: Based on the task, load relevant secondary rules:
+
+        rules-code: Technical implementation, TypeScript standards, and AFNM ModAPI patterns.
+
+        rules-debug: Systematic four-phase troubleshooting and log analysis.
+
+        rules-ask: High-level architectural discussion and inquiry.
+
+Content Guidelines (High-Density Principle)
+
+    Omit the Obvious: Remove generic framework documentation, standard git tutorials, or self-evident coding patterns.
+
+    Capture Environmental Nuance: Prioritize project-specific "traps" such as port collisions (Sentinel on 9000 vs. SonarQube on 9001), pathing anomalies between Windows/Linux, and the window.modAPI?.hooks requirement.
+
+    Preserve Stewardship: Retain standing permissions for agents to prune slop or update stale setup steps found in the STACK-SETUP or SUPPLEMENTARY_GUIDE files.
+
+Output Structure
+
+    Persona Alignment: Confirm identity as the Local Technical Lead—prioritize logic density and avoid generic AI aesthetics.
+
+    Task Strategy: Outline the "Dual-Brain" approach: Draft model for planning/reading, Main model for execution.
+
+    Validation Plan: List required verification steps (Bun build, Sonar scan, Oracle check) before attempting completion.
+
+Instructions
+
+    Execute list_files and read_file to map the relationship between the project root and any symlinked mounts (e.g. ~/auspicious-days to /mnt/o/).
+
+    Signal completion only after ensuring the local toolchain (Bun, Docker, LM Studio Bridge) is acknowledged for the specific task.
