@@ -163,14 +163,13 @@ cat /etc/resolv.conf | grep nameserver
 > Important: For this bridge to work, ensure that LM Studio on your host is configured to bind to `0.0.0.0` or the specific WSL adapter IP and that your Windows Firewall allows inbound connections on the LM Studio port (`default 1234`).
 
 ---
-
- - [STACK SETUP README (this document)](./STACK-SETUP-00-readme.md)
- - [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
+ - [STACK SETUP README](/.STACK-SETUP-00-readme.md)
+ - ### -> [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
  - [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./STACK-SETUP-02-LMStudio-MCP.md)
  - [Step 3: Workflow Operations and Git Tooling](./STACK-SETUP-03-Workflow-Git.md)
  - [Appendix A: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
- - [Appendix B: Installing Sentinel on Arch WSL](./STACK-SETUP-B-Sentinel.md)
- - [Appendix C: Installing SonarQube on Arch WSL](./STACK-SETUP-C-SonarQube.md)
+ - [Appendix B: Installing Sentry on Arch WSL](./STACK-SETUP-B-Sentry.md)
+ - [Appendix C: Installing SonarQube on Arch WSL](./STACK-SETUP-C-SonarQube.md)e.md)
 
 ---
 Developed by the Auspicious-Days Contributor Circle.
