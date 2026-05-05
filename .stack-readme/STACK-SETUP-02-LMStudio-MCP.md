@@ -52,14 +52,15 @@ MCP allows Roo Code to interface securely with external tools, scripts, and syst
    * Verify that the draft model successfully utilizes the terminal tool, reaches out to LM Studio over the WSL bridge, and returns the correct directory listing from your Arch filesystem.
 
 > [!NOTE]
-> *The specific `mcp.json` configuration for custom tool integration will be documented in a separate supplementary guide or generalized here at a later time.*
+> [MCP.json Example](./environment-examples/MCP.example.json)
 
 ---
-
+ - [STACK SETUP README](./STACK-SETUP-00-readme.md)
  - [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
- - [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./STACK-SETUP-02-LMStudio-MCP.md)
+ - -> [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./STACK-SETUP-02-LMStudio-MCP.md)
  - [Step 3: Workflow Operations and Git Tooling](./STACK-SETUP-03-Workflow-Git.md)
- - [Appendix A: Supplementary Guide: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
-
+ - [Appendix A: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
+ - [Appendix B: Installing Sentry on Arch WSL](./STACK-SETUP-B-Sentry.md)
+ - [Appendix C: Installing SonarQube on Arch WSL](./STACK-SETUP-C-SonarQube.md)nfig.md)
 ---
 Developed by the Auspicious-Days Contributor Circle.le.
