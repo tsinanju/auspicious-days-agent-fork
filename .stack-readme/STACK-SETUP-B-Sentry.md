@@ -62,9 +62,25 @@ project = <YOUR_PROJECT_SLUG>
 [auth]
 token = <YOUR_GENERATED_TOKEN>
 ```
-## 5.0 - Agentic Workflows (Code Mappings & Events)
+## 5.0 - Installing the SDK in your Project
+ - While the `sentry-cli` handles source maps and configuration autonomously, your actual application (or mod) needs the Sentry SDK to capture and transmit runtime errors to your local lab.
+ - Ensure you are using `bun` (the primary runtime for this stack) rather than `npm` to maintain dependency consistency.
+ - Navigate to your project root in WSL and install the Node SDK:
+```bash
+bun add @sentry/node
+```
+ - You can now initialize Sentry in your index.ts or test files:
+```TypeScript
+import * as Sentry from "@sentry/node";
+
+Sentry.init({
+  dsn: "http://<YOUR_KEY>@127.0.0.1:9000/1",
+  tracesSampleRate: 1.0,
+});
+```
+## 6.0 - Agentic Workflows (Code Mappings & Events)
  - With Sentry running on port `9000` and the CLI authenticated, your AI agent can now perform advanced debugging tasks natively.
-### 5.1 - Uploading Code Mappings
+### 6.1 - Uploading Code Mappings
  - Code mappings link stack trace paths to your local TypeScript source code paths, allowing Sentry to show the exact lines of code that caused a crash. Roo Code can manage this autonomously using a `mappings.json` file.
  - Example `mappings.json`:
 ```json
@@ -79,16 +95,20 @@ token = <YOUR_GENERATED_TOKEN>
 ```bash
 sentry-cli code-mappings upload ./mappings.json
 ```
-### 5.2 - Sending Mock Events for Verification
+### 6.2 - Using a Mock Script for Event Verification 
  - If the AI writes a complex JSON payload or state modifier, it can generate a mock crash report and push it directly to Sentry to verify the data structure and ensure the code mappings are working.
 ```bash
 sentry-cli send-event ./mock-crash.json
 ```
-### 5.3 - Using test script to cause crash report
- - A //stopped here
-
-
-
+### 6.3 - Using Test Script for Event Verification
+ - A test script has been provided [./.stack-readme/scripts/test-SentryCrashReport.ts](./.stack-readme/scripts/test-SentryCrashReport.ts).
+ - A try/catch wrapped test script has been provided in [./.stack-readme/scripts/test-SentryCrashReport-tryCatch.ts](./.stack-readme/scripts/test-SentryCrashReport-tryCatch.ts)
+```bash
+bun run ./.stack-readme/scripts/[script-name].ts
+```
+# A - Sentry Resources
+ - [Sentry Self-Hosted Documentation](https://develop.sentry.dev/self-hosted/) - Official guide on the self-hosted Docker deployment architecture.
+ - [Sentry CLI Documentation](https://docs.sentry.io/cli/) - Comprehensive reference for CLI commands, event sending, and code mappings.
 ---
  - [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
  - [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./STACK-SETUP-02-LMStudio-MCP.md)
