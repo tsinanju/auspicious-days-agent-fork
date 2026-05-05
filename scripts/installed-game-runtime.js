@@ -6,6 +6,9 @@ const childProcess = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const DEFAULT_GAME_DIR_CANDIDATES = [
+  '/mnt/i/SteamLibrary/steamapps/common/Ascend From Nine Mountains',
+  '/mnt/c/Program Files (x86)/Steam/steamapps/common/Ascend From Nine Mountains',
+  '/mnt/c/Program Files/Steam/steamapps/common/Ascend From Nine Mountains',
   path.join(
     os.homedir(),
     '.local',
