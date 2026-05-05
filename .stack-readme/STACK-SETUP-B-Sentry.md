@@ -1,14 +1,100 @@
-*STACK-SETUP-B-Sentinel.md*
+*STACK-SETUP-B-Sentry.md*
 # (DRAFT)
-# Appendix B: Setting Up Sentry (air-gap local-instance, docker)
-  (TBD)
-  
+# Appendix B: Installing Sentry on Arch WSL
+ - Integrating a self-hosted Sentry instance into your AI-agentic stack allows Roo Code and your local LLMs to actively map stack traces, analyze mock crash reports, and maintain source context natively on your machine, without relying on external cloud services.
+ - Because Sentry consists of multiple microservices, deploying it via Docker within your Arch WSL environment is the most reliable approach for an airgapped or local-only workflow.
+## 1.0 - System Preparation
+ - Sentry is a robust platform (utilizing Kafka, Redis, ClickHouse, and Postgres). It requires sufficient resources to run smoothly.
+ - Ensure your `%USERPROFILE%\.wslconfig` file on your Windows host allocates enough memory to WSL (we recommend at least `memory=8GB` to `12GB`) before starting.
+### Install the required Docker dependencies if you haven't already:
+```bash
+sudo pacman -S docker docker-compose
+sudo systemctl enable --now docker
+# (Recommended)
+sudo usermod -aG docker aiuser
+```
+## 2.0 - Deploying Self-Hosted Sentry
+ - Sentry provides an official self-hosted repository containing all necessary Docker Compose configurations and installation scripts.
+ - Create a directory for the deployment and clone the repository:
+```bash
+mkdir -p ~/sentry-self-hosted
+cd ~/sentry-self-hosted
+git clone https://github.com/getsentry/self-hosted.git .
+```
+
+### Run the installation script. This will pull the required Docker images and set up the internal databases.
+```bash
+./install.sh
+```
+> [!NOTE]
+> During the installation, you will be prompted to create an initial user account (email and password). Keep these credentials safe, as they will be your admin login.
+> If you are not prompted for uname/pass, begin troubleshooting.
+### Sentry will now be accessible from your Windows host browser at `http://localhost:9000`.
+> [!NOTE]
+> Both Sentry and Sonar's default port is 9000, to deconflict, Sonar will be configured on 9001 in Appendix C.
+## 3.0 - Generating the Sentry Auth Token
+ - To allow Roo Code and your MCP servers to interact with Sentry via CLI or API, you must generate an Organization Auth Token.
+ - Navigate to `http://localhost:9000` in your Windows browser and log in.
+ - Navigate to **Settings > Auth Tokens** (under your Organization or Developer settings).
+ - Create a new token. Crucially, ensure it has the `org:ci` scope (this is required for uploading code mappings and debug files).
+ - Copy this token. You will inject it into your `mcp.json` file as the `SENTRY_AUTH_TOKEN` environment variable.
+## 4.0 - Installing the Sentry CLI
+ - The sentry-cli tool is critical for your AI agent to push mock events, manage source context, and upload code mappings autonomously.
+ - Run the following command in your Arch WSL terminal to install it:
+```bash
+curl -sL https://sentry.io/get-cli/ | bash
+```
+### 4.1 - Configuring the CLI ( `.sentryclirc` )
+ - While our MCP environment variables handle authentication for Roo Code, it is best practice to also configure the CLI locally for your aiuser so you can run manual tests without typing out long URL flags.
+ - Create a `~/.sentryclirc` file:
+```bash
+touch ~/.sentryclirc
+nano ~/.sentryclirc
+```
+ - Add your Configuration:
+```ini
+# .sentryclirc
+[defaults]
+url = http://localhost:9000/
+org = <YOUR_ORG_SLUG>
+project = <YOUR_PROJECT_SLUG>
+
+[auth]
+token = <YOUR_GENERATED_TOKEN>
+```
+## 5.0 - Agentic Workflows (Code Mappings & Events)
+ - With Sentry running on port `9000` and the CLI authenticated, your AI agent can now perform advanced debugging tasks natively.
+### 5.1 - Uploading Code Mappings
+ - Code mappings link stack trace paths to your local TypeScript source code paths, allowing Sentry to show the exact lines of code that caused a crash. Roo Code can manage this autonomously using a `mappings.json` file.
+ - Example `mappings.json`:
+```json
+[
+  {
+    "stackRoot": "src/",
+    "sourceRoot": "ai-workflow/src/"
+  }
+]
+```
+ - The AI can upload or update these mappings at any time by running:
+```bash
+sentry-cli code-mappings upload ./mappings.json
+```
+### 5.2 - Sending Mock Events for Verification
+ - If the AI writes a complex JSON payload or state modifier, it can generate a mock crash report and push it directly to Sentry to verify the data structure and ensure the code mappings are working.
+```bash
+sentry-cli send-event ./mock-crash.json
+```
+### 5.3 - Using test script to cause crash report
+ - A //stopped here
+
+
+
 ---
  - [Step 1: Environment Setup (Arch-Headless-WSL & IDE)](./STACK-SETUP-01-ENV.md)
  - [Step 2: LM Studio, MCP Configuration, and Dual-Brain Setup](./STACK-SETUP-02-LMStudio-MCP.md)
  - [Step 3: Workflow Operations and Git Tooling](./STACK-SETUP-03-Workflow-Git.md)
  - [Appendix A: Custom MCP Server Configurations (LM Studio)](./STACK-SETUP-A-MCP-config.md)
- - ### [Appendix B: Installing Sentry on Arch WSL](./STACK-SETUP-B-Sentry.md)
+ - ### -> [Appendix B: Installing Sentry on Arch WSL](./STACK-SETUP-B-Sentry.md)
  - [Appendix C: Installing SonarQube on Arch WSL](./STACK-SETUP-C-SonarQube.md)
 ---
 
