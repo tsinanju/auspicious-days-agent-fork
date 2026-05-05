@@ -52,7 +52,7 @@ MCP allows Roo Code to interface securely with external tools, scripts, and syst
    * Verify that the draft model successfully utilizes the terminal tool, reaches out to LM Studio over the WSL bridge, and returns the correct directory listing from your Arch filesystem.
 
 > [!NOTE]
-> You can find a generalized example below.
+> 
 > [MCP.json Example](./environment-examples/MCP.example.json)
 
 ---
