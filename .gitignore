@@ -27,3 +27,4 @@ sonar-project.properties
 
 # Add'l Ignored Locations
 .vscode/
+/DESCRIPTION.md
