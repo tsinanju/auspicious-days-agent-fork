@@ -1,0 +1,10 @@
+{
+  "workshopId": "[YOUR WORKSHOP ID]",
+  "title": "[YOUR MOD TITLE]",
+  "description": "[LONG DESCRIPTION].",
+  "tags": [
+    "Gameplay, Luck, Calendar, Numerology, Buffs, Crafting"
+  ],
+  "visibility": "[private/public]",
+  "previewImagePath": "src/modContent/SteamPreviewImage.jpg"
+}
