@@ -107,7 +107,7 @@ sentry-cli send-event ./mock-crash.json
 ```
 ### 6.3 - Using Test Script for Event Verification
  - A test script has been provided in [/scripts/test-SentryCrashReport.ts](./scripts/test-SentryCrashReport.ts)
- - A try-catch-wrapped test script has been provided in [/scripts/test-SentryCrashReport-tryCatch.ts](/scripts/test-SentryCrashReport-tryCatch.ts)
+ - A try-catch-wrapped test script has been provided in [/scripts/test-SentryCrashReport-tryCatch.ts](./scripts/test-SentryCrashReport-tryCatch.ts)
 ```bash
 bun run ./.stack-readme/scripts/[script-name].ts
 ```
