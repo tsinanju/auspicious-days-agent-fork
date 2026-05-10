@@ -1,0 +1,131 @@
+Here is the highly refined, production-ready update for your **DevSecOps Agentic MCP Configuration** document.
+
+This revision strips out obsolete references (like LM Studio) and fully aligns the configuration with your master architectural stack: **Arch Linux (WSL2), vLLM serving IBM Granite multi-adapter models, Qdrant Vector Intelligence, and highly strict runtime/compiler guardrails**.
+
+---
+
+# DevSecOps Agentic MCP Configuration & Workspace Directives
+
+This repository contains the Model Context Protocol (`mcp.json`) configuration and workspace directives designed for a highly autonomous, local-first DevSecOps AI Agent. It bridges a local LLM—running via the highly optimized **vLLM** inference engine and orchestrated through **Roo Code**—with an uncompromising, airgapped-capable environment operating exclusively within `Arch Linux (WSL2)`. The stack runs alongside localized Dockerized SonarQube, self-hosted Sentry, and persistent Qdrant vector databases.
+
+## System Isolation & Prerequisites
+
+To guarantee deterministic execution and prevent systemic resource exhaustion, the host Arch Linux WSL environment must enforce strict privilege isolation and kernel parameters prior to initializing the MCP suite:
+
+* **Limited User Execution:** The AI agent and its associated background processes must never execute as `root`. All execution is bound to a dedicated limited user account (`llmuser`) belonging exclusively to the `wheel` and `docker` groups.
+* **Kernel Tuning for Memory Mapping:** Because heavy Java-based static analysis tools (SonarQube/Elasticsearch) require massive memory-mapped file limits, the host kernel must be permanently adjusted. Ensure `/etc/sysctl.d/99-sonarqube.conf` defines `vm.max_map_count = 262144` to prevent immediate Out-Of-Memory (OOM) kernel panics during bootstrap.
+* **WSL2 VRAM Reset Protocol:** To prevent background Windows host allocation from starving the vLLM Key-Value (KV) cache, developers must execute a cold boot via `wsl --shutdown` prior to spinning up the local inference stack.
+* **Runtime Dependencies:** * `Node.js & npm`: Used to dynamically fetch and run standard MCP servers (`npx`).
+* `bun`: The highly optimized JavaScript runtime required for executing local validation pipelines and strict typechecking loops.
+* `uv`: The Rust-based environment resolver required to maintain the hermetically sealed Python 3.12 sandbox for the vLLM backend.
+* `Docker`: Running locally within Arch Linux to host SonarQube, Sentry, and Qdrant containers.
+
+
+
+## Setup & Installation
+
+1. Copy `mcp.example.json` to your local VSCode/Roo Code configuration path (`mcp_settings.json`).
+2. Replace all `<PLACEHOLDER>` tags with exact Arch Linux paths (e.g., `/home/llmuser/projects/...`), database connection strings, and API tokens. Ensure all mounted directories maintain strict `llmuser:llmuser` ownership.
+3. Point your Roo Code OpenAI-compatible provider settings to your local vLLM multi-adapter inference endpoint (defaulting to `http://localhost:8000/v1` bound to the `rag_adapter` alias).
+
+---
+
+## Master Tool Breakdown
+
+This configuration provides the LLM with distinct tools, natively optimized for the restricted Arch Linux environment and partitioned to support non-linear agentic workflows:
+
+### 1.0 Cognitive & Memory Tools
+
+* **Sequential Thinking** (`@modelcontextprotocol/server-sequential-thinking`): Forces the LLM to output multi-step reasoning before modifying the Abstract Syntax Tree (AST), dramatically reducing token inference costs and preventing rapid hallucination loops.
+* **Memory Server** (`@modelcontextprotocol/server-memory`): Builds a persistent local knowledge graph of project architecture, domain lore, and strict TypeScript typing rules.
+
+### 2.0 Vector Intelligence & Non-Linear RAG (Qdrant)
+
+* **Qdrant Sentinel MCP** (`qdrant2`): A universal embedding proxy providing high-dimensional vector intelligence. Instead of rigid linear RAG, this grants the agent introspection tools (`qdrant_list_collections`, `qdrant_scroll`) to autonomously search historical commits, API definitions, and complex module dependencies *before* executing edits. It features automatic zero-configuration dimension locking to prevent destructive zero-padding data corruption.
+
+### 3.0 File & Version Control (Arch Native)
+
+* **WSL Filesystem** (`mcp-server-wsl-filesystem`): Operates strictly within the `/home/llmuser/` boundaries, running native Linux file manipulation and high-performance `grep`/`find` searches directly inside the workspace.
+* **Git Server** (`@modelcontextprotocol/server-git`): Reads commit history and generates diffs for tracking codebase evolution natively.
+
+### 4.0 DevSecOps Command Execution
+
+* **Command Suite** (`@modelcontextprotocol/server-command-execution`): The core security bridge safely executing local Arch Linux CLIs.
+* **Strictly Allowed Commands:** Restricted exclusively to `sonar, sonar-scanner, sentry-cli, curl, wsl, docker, npm, bun, tsc, git`. Note the inclusion of `bun` to support mandatory build validation pipelines.
+* **Container Execution:** Allows the AI to use `docker` to execute verification scans natively inside isolated containers running on Arch.
+
+### 5.0 Telemetry, Verification & Database Interaction
+
+* **Sentry MCP Server** (`sentry`): Interacts directly with local production telemetry via `stdio`. Exposes endpoints like `search_events` and `search_issues` to pull exact line numbers, variable states, and session replay logs for deep root-cause debugging.
+* **SonarQube MCP Server** (`sonarqube`): Invokes local static verification, exposing exact file paths, severity metrics, and rule IDs directly to the agent's context window to ensure no "vibe-coded" solutions bypass security quality gates.
+* **Postgres Server** (`@modelcontextprotocol/server-postgres`): Allows native SQL queries against application databases or the local SonarQube backend for deep state introspection.
+
+---
+
+## Core MCP JSON Configurations
+
+Integrate these native tool definitions directly into your `mcp_settings.json` environment:
+
+```json
+{
+  "mcpServers": {
+    "sentry": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sentry"],
+      "env": {
+        "SENTRY_ACCESS_TOKEN": "YOUR_SENTRY_ORG_TOKEN",
+        "EMBEDDED_AGENT_PROVIDER": "openai",
+        "OPENAI_API_KEY": "sk-local-vllm-proxy-key"
+      }
+    },
+    "sonarqube": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/sonarqube"
+      ],
+      "env": {
+        "SONARQUBE_URL": "http://127.0.0.1:9000",
+        "SONARQUBE_USER_TOKEN": "YOUR_SONAR_TOKEN",
+        "SONARQUBE_TOOLSETS": "analysis,issues,measures,projects,rules,security-hotspots"
+      }
+    }
+  }
+}
+
+```
+
+---
+
+## System Prompting & Architectural Directives
+
+To maximize the autonomous efficacy of the Roo Code orchestrator, the following parameters must be mapped directly into the agent's **Custom Instructions**:
+
+### 1. Maximum Strictness TypeScript Guardrails
+
+The agent is mathematically bound by the project's fortified `tsconfig.json`. Code generated must strictly adhere to these absolute defensive measures:
+
+* **No Unchecked Access:** `noUncheckedIndexedAccess` is active. When accessing arrays or objects via index signatures, the agent must explicitly write defensive runtime boundary checks to handle dynamically appended `undefined` states.
+* **Property Integrity:** `exactOptionalPropertyTypes` forbids lazily assigning explicit `undefined` values to optional properties.
+* **Zero Dead Code:** Settings like `noUnusedLocals`, `noUnusedParameters`, and `allowUnreachableCode: false` will instantly crash the validation pipeline if unreferenced variables or logic dead-ends are generated.
+* **Explicit Overrides:** Class inheritance modifications must utilize the `override` keyword explicitly (`noImplicitOverride`).
+
+### 2. The ModAPI Fallback Ladder
+
+When interacting with external application states or injecting React/Material UI DOM elements, the agent must strictly respect the prioritized interaction ladder to prevent deterministic desynchronization:
+
+* **Tier 1 (Read/Subscribe):** Use `window.modAPI.getGameStateSnapshot()` for read-only memory clones. Bind reactivity strictly via `window.modAPI.subscribe()`.
+* **Tier 2 (Official UI Injection):** Execute `registerOptionsUI()` for settings panels or `injectUI()` for precise localized DOM affordances.
+* **Tier 3 (Lifecycle Hooks):** State mutations are restricted to designated lifecycle events (e.g., `onBeforeCombat` or `onGenerateExploreEvents`).
+* **Tier 4 (Raw Store Read-Only):** The underlying Redux store (`window.gameStore`) is strictly read-only. Hooks like `onReduxAction` are extreme hazards and must remain completely deterministic and free of network/UI side effects.
+* **Tier 5 (Forbidden Zones):** Direct React Fiber manipulation, raw DOM scraping, or bundling externalized dependencies (React, ReactDOM, `@mui/material`) within Webpack is expressly prohibited.
+
+### 3. Evidentiary Validation Loops
+
+The agent must prioritize concrete terminal evidence over conversational theory:
+
+* **Pre-Commit Loop:** Prior to finalizing any AST task, the agent must invoke `bun run typecheck` and `bun run build` via the Command Suite. Any failure triggers an immediate rollback to Debug mode.
+* **Runtime Oracle Verification:** Run `bun run runtime:oracle`. If local prose within reference documentation conflicts with raw terminal output (`bun run runtime:grep -- "<symbol>"`), the agent is constrained to trust the terminal output representing the actual installed runtime.
+* **Documentation Stewardship:** If stale or misleading prose is identified within the `.agents/skills/*` architecture while resolving an issue, the agent possesses standing permission to execute a self-healing patch to update the repository lore simultaneously.

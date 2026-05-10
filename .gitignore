@@ -1,30 +1,80 @@
+# =========================
+# Dependencies & Builds
+# =========================
 node_modules/
-afnm-workshop.json
 dist/
 builds/
 mods/
 tmp/
-settings.json
-*.log
+
+# =========================
+# Old Files
+# =========================
+.stack-readme/.depreciated
+
+# =========================
+# Environment & Secrets
+# =========================
 .env
 .env.*
 !.env.example
+*.secret
+
+# =========================
+# Logs & Project Specific
+# =========================
+*.log
+afnm-workshop.json
+/DESCRIPTION.md
+
+# =========================
+# IDE & Editor
+# =========================
+.idea/
+.vscode/
+.vscode/settings.json
+settings.json
+
+# =========================
+# AI Agents & Frameworks
+# =========================
 .vera/
 .agent/
 .claude/
 .factory/
 .junie/
-# NOTE: .agents/ is NOT ignored — it is the cross-agent skills directory per agentskills.io
+# NOTE: .agents/ is NOT ignored — cross-agent skills directory per agentskills.io
 # Project skills live in .agents/skills/{skill-name}/SKILL.md
-
-# SonarFiles
-.scannerwork/
-sonar-project.properties
+!./agents
 
 # Roo Code Architecture
+# Ignore everything inside .roo by default to catch state/history files...
+.roo/*
+
+# ...but explicitly track these essential architecture directories:
 !.roo/rules-code/
 !.roo/skills/
 
-# Add'l Ignored Locations
-.vscode/
-/DESCRIPTION.md
+# =========================
+# AI Models & Vector DB
+# =========================
+*.gguf
+qdrant_data/
+qdrant_storage/
+
+# =========================
+# Testing & Code Quality
+# =========================
+.scannerwork/
+sonar-project.properties
+
+# =========================
+# Infrastructure (Self-Hosted Sentry)
+# =========================
+sentry-data/
+sentry-postgres/
+sentry-redis/
+sentry-kafka/
+sentry-clickhouse/
+sentry-zookeeper/
+sentry-symbolicator/

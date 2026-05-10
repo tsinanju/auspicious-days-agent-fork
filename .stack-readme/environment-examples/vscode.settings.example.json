@@ -1,0 +1,18 @@
+{
+  "cSpell.words": [
+    "YOUR_PROJECT_ACRONYM",
+    "CUSTOM_DOMAIN_TERM",
+    "developer-name",
+    "vendor-name"
+  ],
+  "sonarlint.connectedMode.connections.sonarqube": [
+    {
+      "serverUrl": "http://127.0.0.1:9001",
+      "connectionId": "local-sonarqube"
+    }
+  ],
+  "sonarlint.connectedMode.project": {
+    "connectionId": "local-sonarqube",
+    "projectKey": "YOUR_SONAR_PROJECT_KEY"
+  }
+}
